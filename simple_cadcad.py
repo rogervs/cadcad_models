@@ -18,7 +18,6 @@ def p_something(params,
     return {'policy_input_1': random_value_1,
             'policy_input_2': random_value_2}
 
-
 def s_something(params,
                 substep,
                 state_history,
@@ -27,7 +26,6 @@ def s_something(params,
     new_value = policy_input['policy_input_1']
     new_value += policy_input['policy_input_2']
     return ('something', new_value)
-
 
 partial_state_update_blocks = [
     {
@@ -55,7 +53,6 @@ genesis_states = {
     'something': 0
 }
 
-
 sim_config = {
     'N': MONTE_CARLO_RUNS,
     'T': range(SIMULATION_TIMESTEPS),
@@ -71,27 +68,20 @@ exp.append_configs(
     partial_state_update_blocks=partial_state_update_blocks
 )
 
-
-
-
 golem_conf = {
         'NODES': 3, # Number of nodes to utilise from the Golem Network
         'BUDGET': 10.0, # Maximum amount of crypto you are prepared to spend
         'SUBNET': "community.3", # choose your subnet, currently this is the test network
-        'YAGNA_APPKEY': '856340c2e28f4c4ab0def44d09306439', # get this from `yagna app-key list`
+        'YAGNA_APPKEY': '517fa9720e9f43a7af2325a92b401e3e', # get this from `yagna app-key list`
         'TIMEOUT': 120 # In seconds
         }
 
 Executor = Ambassador(Executor, golem_conf)
-exec_context = ExecutionContext(context=ExecutionMode.single_mode )
+exec_context = ExecutionContext()
 simulation = Executor(exec_context=exec_context, configs=configs)
-#simulation = Executor(exec_context=local_mode_ctx, configs=configs)
-
 
 raw_system_events, tensor_field, sessions = simulation.execute()
 
 df = pd.DataFrame(raw_system_events)
 
-
 print(df)
-
