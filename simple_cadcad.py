@@ -1,3 +1,5 @@
+#Source: https://github.com/cadCAD-org/snippets
+
 import numpy as np
 from cadCAD.configuration import Experiment
 from cadCAD.configuration.utils import config_sim
